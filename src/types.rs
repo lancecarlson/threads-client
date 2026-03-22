@@ -44,11 +44,13 @@ pub struct CreateContainerParams {
     pub gif_attachment: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub enable_reply_approvals: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub reply_to_id: Option<String>,
 }
 
 // --- Response structs ---
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct UserProfile {
     pub id: Option<String>,
     pub username: Option<String>,
@@ -58,7 +60,7 @@ pub struct UserProfile {
     pub is_verified: Option<bool>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct PublicProfile {
     pub username: Option<String>,
     pub name: Option<String>,
@@ -72,12 +74,12 @@ pub struct PublicProfile {
     pub is_verified: Option<bool>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Owner {
     pub id: Option<String>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Thread {
     pub id: Option<String>,
     pub media_product_type: Option<String>,
@@ -100,46 +102,46 @@ pub struct Thread {
     pub reply_audience: Option<String>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct PaginatedResponse<T> {
     pub data: Vec<T>,
     pub paging: Option<Paging>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Paging {
     pub cursors: Option<Cursors>,
     pub next: Option<String>,
     pub previous: Option<String>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Cursors {
     pub before: Option<String>,
     pub after: Option<String>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct CreateContainerResponse {
     pub id: Option<String>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct PublishResponse {
     pub id: Option<String>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct SuccessResponse {
     pub success: Option<bool>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct InsightsResponse {
     pub data: Vec<Insight>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Insight {
     pub name: Option<String>,
     pub period: Option<String>,
@@ -150,7 +152,7 @@ pub struct Insight {
     pub total_value: Option<serde_json::Value>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct InsightValue {
     pub value: Option<serde_json::Value>,
     pub end_time: Option<String>,

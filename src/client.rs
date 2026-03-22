@@ -334,6 +334,16 @@ impl ThreadsClient {
         self.check_response(resp).await
     }
 
+    // --- Pagination ---
+
+    pub async fn fetch_next_page<T: serde::de::DeserializeOwned>(
+        &self,
+        url: &str,
+    ) -> Result<T> {
+        let resp = self.http.get(url).send().await?;
+        self.check_response(resp).await
+    }
+
     // --- Internal ---
 
     async fn check_response<T: serde::de::DeserializeOwned>(
